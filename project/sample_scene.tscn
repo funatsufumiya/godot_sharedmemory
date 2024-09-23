@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbyrticosbwf8"]
+
+[ext_resource type="Script" path="res://sharedmemory_reader.gd" id="1_ohc3t"]
+
+[node name="SampleScene" type="Node2D"]
+
+[node name="SharedMemoryReader" type="Node" parent="."]
+script = ExtResource("1_ohc3t")

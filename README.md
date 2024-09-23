@@ -1,5 +1,7 @@
 # godot_sharedmemory
 
+***WARNING: STILL IN DEVELOPMENT, NOT READY FOR USE***
+
 SharedMemory addon for Godot 4.2.2 - 4.3, using [kyr0/libsharedmemory](https://github.com/kyr0/libsharedmemory).
 
 ## Install

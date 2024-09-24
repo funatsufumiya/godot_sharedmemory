@@ -75,16 +75,23 @@ PackedFloat32Array SharedMemoryReader::read_float_array() {
         return PackedFloat32Array();
     }
 
-    float* data = stream->readFloatArray();
-    size_t length = stream->readLength(lsm::kMemoryTypeFloat);
+    // float* data = stream->readFloatArray();
+    // size_t length = stream->readLength(lsm::kMemoryTypeFloat);
+
+    // PackedFloat32Array arr;
+    // arr.resize(length);
+
+    // auto ptrw = arr.ptrw();
+    // memcpy(ptrw, data, length * sizeof(float));
+
+    // delete[] data;
 
     PackedFloat32Array arr;
+    size_t length = stream->readLength(lsm::kMemoryTypeFloat);
     arr.resize(length);
 
     auto ptrw = arr.ptrw();
-    memcpy(ptrw, data, length * sizeof(float));
-
-    delete[] data;
+    stream->readFloatArrayBuf(ptrw);
 
     return arr;
 }
@@ -95,16 +102,23 @@ PackedFloat64Array SharedMemoryReader::read_double_array() {
         return PackedFloat64Array();
     }
 
-    double* data = stream->readDoubleArray();
-    size_t length = stream->readLength(lsm::kMemoryTypeDouble);
+    // double* data = stream->readDoubleArray();
+    // size_t length = stream->readLength(lsm::kMemoryTypeDouble);
+
+    // PackedFloat64Array arr;
+    // arr.resize(length);
+
+    // auto ptrw = arr.ptrw();
+    // memcpy(ptrw, data, length * sizeof(double));
+
+    // delete[] data;
 
     PackedFloat64Array arr;
+    size_t length = stream->readLength(lsm::kMemoryTypeDouble);
     arr.resize(length);
 
     auto ptrw = arr.ptrw();
-    memcpy(ptrw, data, length * sizeof(double));
-
-    delete[] data;
+    stream->readDoubleArrayBuf(ptrw);
 
     return arr;
 }
@@ -115,13 +129,20 @@ PackedByteArray SharedMemoryReader::read_bytes() {
         return PackedByteArray();
     }
 
-    std::string str = stream->readString();
+    // std::string str = stream->readString();
     
-    PackedByteArray arr;
-    arr.resize(str.size());
+    // PackedByteArray arr;
+    // arr.resize(str.size());
 
+    // auto ptrw = arr.ptrw();
+    // memcpy(ptrw, str.c_str(), str.size());
+
+    PackedByteArray arr;
+    size_t length = stream->readLength(lsm::kMemoryTypeString);
+    arr.resize(length);
+    
     auto ptrw = arr.ptrw();
-    memcpy(ptrw, str.c_str(), str.size());
+    stream->readStringBuf((char*) ptrw);
 
     return arr;
 }

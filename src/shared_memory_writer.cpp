@@ -6,7 +6,7 @@
 using namespace godot;
 
 void SharedMemoryWriter::_bind_methods() {
-    ClassDB::bind_static_method("SharedMemoryWriter", D_METHOD("new_from"), &SharedMemoryWriter::new_from);
+    ClassDB::bind_static_method("SharedMemoryWriter", D_METHOD("create"), &SharedMemoryWriter::create);
     ClassDB::bind_method(D_METHOD("init"), &SharedMemoryWriter::init);
 }
 
@@ -20,8 +20,8 @@ SharedMemoryWriter::~SharedMemoryWriter()
     // UtilityFunctions::print("SharedMemoryWriter::destructor");
 }
 
-SharedMemoryWriter* SharedMemoryWriter::new_from() {
-    // UtilityFunctions::print("SharedMemoryWriter::new_from");
+SharedMemoryWriter* SharedMemoryWriter::create() {
+    // UtilityFunctions::print("SharedMemoryWriter::create");
 
     SharedMemoryWriter* sharedmemory = memnew(SharedMemoryWriter);
     sharedmemory->init();

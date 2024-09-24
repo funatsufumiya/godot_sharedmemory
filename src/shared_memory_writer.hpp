@@ -21,7 +21,7 @@ public:
     SharedMemoryWriter();
     ~SharedMemoryWriter();
 
-    static SharedMemoryWriter* new_from();
+    static SharedMemoryWriter* create();
     void init();
     void _ready() override;
     void _process(double delta) override;

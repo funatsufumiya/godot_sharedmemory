@@ -1,7 +1,7 @@
 class_name SharedMemoryTest
 extends Node
 
-@onready var sm_reader:SharedMemoryReader = SharedMemoryReader.new_from()
+@onready var sm_reader:SharedMemoryReader = SharedMemoryReader.create()
 
 func _ready():
 	pass

@@ -21,7 +21,7 @@ public:
     SharedMemoryReader();
     ~SharedMemoryReader();
 
-    static SharedMemoryReader* new_from();
+    static SharedMemoryReader* create();
     void init();
     void _ready() override;
     void _process(double delta) override;

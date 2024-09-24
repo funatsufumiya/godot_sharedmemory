@@ -45,6 +45,30 @@ inline void throw_error(std::string message) {
     abort();
 }
 
+inline void push_error(std::string message) {
+    godot::String msg = message.c_str();
+    godot::UtilityFunctions::push_error(msg);
+}
+
+inline std::string errorToString(Error error) {
+    switch (error) {
+        case kOK:
+            return "OK";
+        case kErrorCreationFailed:
+            return "Error: Creation failed";
+        case kErrorMappingFailed:
+            return "Error: Mapping failed";
+        case kErrorOpeningFailed:
+            return "Error: Opening failed";
+    }
+}
+
+inline void push_memory_error(Error error) {
+    std::string message = errorToString(error);
+    std::string header = "[SharedMemory] ";
+    push_error(header + message);
+}
+
 // define my throw function
 
 // byte sizes of memory layout
@@ -258,14 +282,35 @@ inline Memory::~Memory() {
 
 class SharedMemoryReadStream {
 public:
+    /// Tries to create a shared memory segment for reading.
+    /// returns nullptr if the segment could not be opened.
+    static std::pair<bool, std::shared_ptr<SharedMemoryReadStream>> tryCreate(const std::string name, const std::size_t bufferSize, const bool isPersistent) {
+        auto stream = std::make_shared<SharedMemoryReadStream>(name, bufferSize, isPersistent);
+        auto err = stream->getMemoryErrorStatus();
+        if (err != kOK) {
+            // push_memory_error(err);
+            push_error("Shared memory segment could not be opened. (reason: " + errorToString(err) + ")");
+            if (err == kErrorMappingFailed) {
+                stream->close();
+            }
+            return std::make_pair(false, nullptr);
+        }
+        return std::make_pair(true, stream);
+    }
 
     SharedMemoryReadStream(const std::string name, const std::size_t bufferSize, const bool isPersistent): 
         _memory(name, bufferSize, isPersistent) {
 
-        if (_memory.open() != kOK) {
+        memoryErrorStetus = _memory.open();
+        if (memoryErrorStetus != kOK) {
             // throw "Shared memory segment could not be opened.";
-            throw_error("Shared memory segment could not be opened.");
+            // throw_error("Shared memory segment could not be opened.");
+            push_error("Shared memory segment could not be opened. (reason: " + errorToString(memoryErrorStetus) + ")");
         }
+    }
+
+    Error getMemoryErrorStatus() {
+        return memoryErrorStetus;
     }
 
     inline char readFlags() {
@@ -379,18 +424,40 @@ public:
 
 private:
     Memory _memory;
+    Error memoryErrorStetus = kOK;
 };
 
 class SharedMemoryWriteStream {
 public:
+    /// Tries to create a shared memory segment for writing.
+    /// returns nullptr if the segment could not be created.
+    static std::pair<bool, std::shared_ptr<SharedMemoryWriteStream>> tryCreate(const std::string name, const std::size_t bufferSize, const bool isPersistent) {
+        auto stream = std::make_shared<SharedMemoryWriteStream>(name, bufferSize, isPersistent);
+        auto err = stream->getMemoryErrorStatus();
+        if (err != kOK) {
+            // push_memory_error(err);
+            push_error("Shared memory segment could not be created. (reason: " + errorToString(err) + ")");
+            if (err == kErrorMappingFailed) {
+                stream->close();
+            }
+            return std::make_pair(false, nullptr);
+        }
+        return std::make_pair(true, stream);
+    }
 
     SharedMemoryWriteStream(const std::string name, const std::size_t bufferSize, const bool isPersistent): 
         _memory(name, bufferSize, isPersistent) {
 
-        if (_memory.create() != kOK) {
+        memoryErrorStetus = _memory.create();
+        if (memoryErrorStetus != kOK) {
             // throw "Shared memory segment could not be created.";
-            throw_error("Shared memory segment could not be created.");
+            // throw_error("Shared memory segment could not be created.");
+            push_error("Shared memory segment could not be created. (reason: " + errorToString(_memory.create()) + ")");
         }
+    }
+
+    Error getMemoryErrorStatus() {
+        return memoryErrorStetus;
     }
 
     inline void close() {
@@ -461,12 +528,15 @@ public:
         std::memcpy(&memory[flagSize + bufferSizeSize], data, bufferSize);
     }
 
+
+
     inline void destroy() {
         _memory.destroy();
     }
 
 private:
     Memory _memory;
+    Error memoryErrorStetus = kOK;
 };
 
 

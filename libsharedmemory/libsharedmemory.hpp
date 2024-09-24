@@ -10,7 +10,14 @@
 #include <cstdint>
 #include <cstring>
 #include <string>
+
+#if defined(_WIN32)
+#include <io.h>
+#else
 #include <unistd.h>
+#endif
+
+
 #include <iostream>
 #include <cstddef> // nullptr_t, ptrdiff_t, std::size_t
 #include <memory>

@@ -47,7 +47,7 @@ use [godot_sharedmemory_bin](https://github.com/funatsufumiya/godot_sharedmemory
 
 ## Example Project
 
-see [`project/`](project) directory, or [GDScript of demo project](https://github.com/funatsufumiya/godot_sharedmemory/blob/main/project/sharedmemory_reader.gd)
+see [`project/`](project) directory, or [GDScript of demo project](https://github.com/funatsufumiya/godot_sharedmemory/blob/main/project/sharedmemory_test.gd)
 
 
 ## Build and Run

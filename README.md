@@ -6,7 +6,7 @@ Shared Memory addon for Godot 4.2.2 - 4.3, using [kyr0/libsharedmemory](https://
 
 use [godot_sharedmemory_bin](https://github.com/funatsufumiya/godot_sharedmemory_bin). see [instruction](https://github.com/funatsufumiya/godot_sharedmemory_bin/blob/main/README.md)
 
-more example, see [GDScript of demo project](https://github.com/funatsufumiya/godot_sharedmemory/blob/main/project/sharedmemory_reader.gd)
+more example, see [GDScript of demo project](https://github.com/funatsufumiya/godot_sharedmemory/blob/main/project/sharedmemory_test.gd)
 
 ## API
 

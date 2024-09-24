@@ -94,7 +94,7 @@ void SharedMemoryWriter::write_bytes(PackedByteArray data) {
     }
 
     // convert to std::string, and write as string
-    u_int8_t* ptr = data.ptrw();
+    auto ptr = data.ptrw();
     size_t size = data.size();
 
     std::string str(reinterpret_cast<char*>(ptr), size);

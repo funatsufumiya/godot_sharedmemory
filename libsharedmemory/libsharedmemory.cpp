@@ -1,5 +1,7 @@
 #include "libsharedmemory.hpp"
 
+namespace lsm {
+
 // Windows shared memory implementation
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 
@@ -164,3 +166,5 @@ inline Memory::~Memory() {
 }
 
 #endif // defined(__APPLE__) || defined(__linux__) || defined(__unix__) || defined(_POSIX_VERSION) || defined(__ANDROID__)
+
+}

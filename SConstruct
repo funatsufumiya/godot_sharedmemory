@@ -74,6 +74,7 @@ sources = Glob("src/*.cpp")
 
 # Add libsharedmemory source files.
 env.Append(CPPPATH=["libsharedmemory/"])
+sources += Glob("libsharedmemory/*.cpp")
 # sources += Glob("libsharedmemory/include/libsharedmemory/*.hpp")
 
 # # Add lz4 source files.

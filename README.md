@@ -6,7 +6,7 @@ Shared Memory addon for Godot 4.2.2 - 4.3, using [kyr0/libsharedmemory](https://
 
 use [godot_sharedmemory_bin](https://github.com/funatsufumiya/godot_sharedmemory_bin). see [instruction](https://github.com/funatsufumiya/godot_sharedmemory_bin/blob/main/README.md)
 
-more example, see [GDScript of demo project](https://github.com/funatsufumiya/godot_sharedmemory/blob/main/project/sharedmemory_test.gd)
+more example, see [GDScript of demo project](https://github.com/funatsufumiya/godot_sharedmemory/blob/main/project/sharedmemory_reader.gd)
 
 ## API
 
@@ -30,9 +30,9 @@ more example, see [GDScript of demo project](https://github.com/funatsufumiya/go
         - kMemoryTypeFloat = 4,
         - kMemoryTypeDouble = 8,
 - `read_length() -> int`
-    - Returns the length of the data in the shared memory.
+    - Returns the length of the data in the shared memory. (returns array size or string length, not byte size)
 - `read_size() -> int`
-    - Returns the size of the shared memory. (not divided by type size)
+    - Returns the size of the shared memory. (not divided by type size. returns in bytes)
 
 ### SharedMemoryWriter
 

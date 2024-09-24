@@ -38,6 +38,7 @@ use [godot_sharedmemory_bin](https://github.com/funatsufumiya/godot_sharedmemory
     - Static method.
     - Create a shared memory writer. If failed, return `null`.
 - `close()`
+  - Close the shared memory (the memory data will only be deleted if `isPersistent` is `false`).
 - `destroy()`
     - Destroy the shared memory.
 - `write_string(value: String)`

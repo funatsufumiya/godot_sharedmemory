@@ -10,18 +10,18 @@
 
 namespace godot {
 
-class SharedMemory : public Node
+class SharedMemoryReader : public Node
 {
-    GDCLASS(SharedMemory, Node);
+    GDCLASS(SharedMemoryReader, Node);
 
 protected:
     static void _bind_methods();
 
 public:
-    SharedMemory();
-    ~SharedMemory();
+    SharedMemoryReader();
+    ~SharedMemoryReader();
 
-    static SharedMemory* new_from();
+    static SharedMemoryReader* new_from();
     void init();
     void _ready() override;
     void _process(double delta) override;

@@ -7,7 +7,8 @@
 #include <godot_cpp/godot.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
-#include "shared_memory.hpp"
+#include "shared_memory_reader.hpp"
+#include "shared_memory_writer.hpp"
 
 using namespace godot;
 
@@ -15,7 +16,8 @@ void gdextension_initialize(ModuleInitializationLevel p_level)
 {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE)
 	{
-		ClassDB::register_class<SharedMemory>();
+		ClassDB::register_class<SharedMemoryReader>();
+		ClassDB::register_class<SharedMemoryWriter>();
 	}
 }
 

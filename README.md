@@ -44,7 +44,6 @@ more example, see [GDScript of demo project](https://github.com/funatsufumiya/go
 - `close()`
 - `destroy()`
     - Destroy the shared memory.
-
 - `write_string(value: String)`
 - `write_float_array(value: PackedFloat32Array)`
 - `write_double_array(value: PackedFloat64Array)`

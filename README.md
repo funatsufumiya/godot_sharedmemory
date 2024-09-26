@@ -2,8 +2,6 @@
 
 Shared Memory addon for Godot 4.2.2 - 4.3, using [kyr0/libsharedmemory](https://github.com/kyr0/libsharedmemory).
 
-***WARNING: Currently not working well between processes.*** see [ofxSharedMemory issue#1](https://github.com/funatsufumiya/ofxSharedMemory/issues/1)
-
 ## Install
 
 use [godot_sharedmemory_bin](https://github.com/funatsufumiya/godot_sharedmemory_bin). see [instruction](https://github.com/funatsufumiya/godot_sharedmemory_bin/blob/main/README.md)

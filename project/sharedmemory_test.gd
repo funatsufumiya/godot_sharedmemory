@@ -81,7 +81,7 @@ func _test_string():
 		print("read: ", str)
 
 func _test_bytes():
-	writer = SharedMemoryWriter.try_create("bytePipe", 65535, false)
+	writer = SharedMemoryWriter.try_create("bytePipe", 65535, true)
 	if writer == null:
 		print("Failed to create shared memory writer")
 		return
@@ -92,7 +92,7 @@ func _test_bytes():
 	writer.write_bytes(data)
 	print("wrote: ", data)
 
-	reader = SharedMemoryReader.try_create("bytePipe", 65535, false)
+	reader = SharedMemoryReader.try_create("bytePipe", 65535, true)
 
 	if reader == null:
 		print("Failed to create shared memory reader")
@@ -117,7 +117,7 @@ func _test_bytes():
 		print("read: ", bytes)
 
 func _test_floats():
-	writer = SharedMemoryWriter.try_create("floatPipe", 65535, false)
+	writer = SharedMemoryWriter.try_create("floatPipe", 65535, true)
 	if writer == null:
 		print("Failed to create shared memory writer")
 		return
@@ -128,7 +128,7 @@ func _test_floats():
 	writer.write_float_array(data)
 	print("wrote: ", data)
 
-	reader = SharedMemoryReader.try_create("floatPipe", 65535, false)
+	reader = SharedMemoryReader.try_create("floatPipe", 65535, true)
 
 	if reader == null:
 		print("Failed to create shared memory reader")
@@ -157,7 +157,7 @@ func _test_floats():
 		print("read: ", floats)
 
 func _test_doubles():
-	writer = SharedMemoryWriter.try_create("doublePipe", 65535, false)
+	writer = SharedMemoryWriter.try_create("doublePipe", 65535, true)
 	if writer == null:
 		print("Failed to create shared memory writer")
 		return
@@ -168,7 +168,7 @@ func _test_doubles():
 	writer.write_double_array(data)
 	print("wrote: ", data)
 
-	reader = SharedMemoryReader.try_create("doublePipe", 65535, false)
+	reader = SharedMemoryReader.try_create("doublePipe", 65535, true)
 
 	if reader == null:
 		print("Failed to create shared memory reader")

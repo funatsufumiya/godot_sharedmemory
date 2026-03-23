@@ -597,7 +597,9 @@ public:
 
         if (string.size() > std::numeric_limits<std::uint32_t>::max())
         {
-            throw std::runtime_error("String payload exceeds maximum shared memory size.");
+            // throw std::runtime_error("String payload exceeds maximum shared memory size.");
+            throw_error("String payload exceeds maximum shared memory size.");
+            return;
         }
 
         lockForWrite(memory);
@@ -653,7 +655,9 @@ private:
 
         if (length > 0 && length > (std::numeric_limits<std::uint32_t>::max() / sizeof(T)))
         {
-            throw std::runtime_error("Numeric payload exceeds maximum shared memory size.");
+            // throw std::runtime_error("Numeric payload exceeds maximum shared memory size.");
+            throw_error("Numeric payload exceeds maximum shared memory size.");
+            return;
         }
 
         const auto memory = static_cast<char*>(_memory.data());
@@ -830,7 +834,9 @@ public:
         {
             if (_memory.create() != Error::OK)
             {
-                throw std::runtime_error("Shared memory queue could not be created.");
+                // throw std::runtime_error("Shared memory queue could not be created.");
+                throw_error("Shared memory queue could not be created.");
+                return;
             }
 
             // Initialize queue metadata
@@ -848,7 +854,9 @@ public:
         {
             if (_memory.open() != Error::OK)
             {
-                throw std::runtime_error("Shared memory queue could not be opened.");
+                // throw std::runtime_error("Shared memory queue could not be opened.");
+                throw_error("Shared memory queue could not be opened.");
+                return;
             }
 
             // Read queue metadata
@@ -886,12 +894,16 @@ public:
     {
         if (!_isWriter)
         {
-            throw std::runtime_error("Cannot enqueue from a reader queue instance.");
+            // throw std::runtime_error("Cannot enqueue from a reader queue instance.");
+            throw_error("Cannot enqueue from a reader queue instance.");
+            return false;
         }
 
         if (message.size() > _maxMessageSize)
         {
-            throw std::runtime_error("Message exceeds maximum message size.");
+            // throw std::runtime_error("Message exceeds maximum message size.");
+            throw_error("Message exceeds maximum message size.");
+            return false;
         }
 
         lockProducer();
@@ -935,7 +947,9 @@ public:
     {
         if (_isWriter)
         {
-            throw std::runtime_error("Cannot dequeue from a writer queue instance.");
+            // throw std::runtime_error("Cannot dequeue from a writer queue instance.");
+            throw_error("Cannot dequeue from a writer queue instance.");
+            return false;
         }
 
         lockConsumer();
@@ -980,7 +994,8 @@ public:
     {
         if (_isWriter)
         {
-            throw std::runtime_error("Cannot peek from a writer queue instance.");
+            push_error("Cannot peek from a writer queue instance.");
+            return false;
         }
 
         lockConsumer();

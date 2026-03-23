@@ -51,7 +51,7 @@ func _ready():
 			_test_doubles()	
 
 func _test_string():
-	writer = SharedMemoryWriter.try_create("strPipe", 65535, false)
+	writer = SharedMemoryWriter.try_create("strPipe", 65535, true)
 	if writer == null:
 		print("Failed to create shared memory writer")
 		return
@@ -60,7 +60,7 @@ func _test_string():
 	writer.write_string(data)
 	print("wrote: ", data)
 
-	reader = SharedMemoryReader.try_create("strPipe", 65535, false)
+	reader = SharedMemoryReader.try_create("strPipe", 65535, true)
 
 	if reader == null:
 		print("Failed to create shared memory reader")

@@ -424,21 +424,21 @@ public:
     }
 
     inline void readFloatArrayBuf(float* buf) {
-        std::size_t size = readSize(kMemoryTypeFloat);
-
-        auto data = readFloatArray();
-
-        // copy to data buffer
-        std::memcpy(buf, &data, size);
+        const auto memory = static_cast<const char*>(_memory.data());
+        lockForRead();
+        const std::size_t byteSize = readSize(kMemoryTypeFloat);
+        const std::size_t length = byteSize / sizeOfOneFloat;
+        std::memcpy(buf, &memory[dataOffset], byteSize);
+        unlockRead();
     }
 
     inline void readDoubleArrayBuf(double* buf) {
-        std::size_t size = readSize(kMemoryTypeDouble);
-
-        auto data = readDoubleArray();
-
-        // copy to data buffer
-        std::memcpy(buf, &data, size);
+        const auto memory = static_cast<const char*>(_memory.data());
+        lockForRead();
+        const std::size_t byteSize = readSize(kMemoryTypeDouble);
+        const std::size_t length = byteSize / sizeOfOneDouble;
+        std::memcpy(buf, &memory[dataOffset], byteSize);
+        unlockRead();
     }
 
 private:

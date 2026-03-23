@@ -415,12 +415,11 @@ public:
     }
 
     inline void readStringBuf(char* buf) {
-        std::size_t size = readSize(kMemoryTypeString);
-
-        auto data = readString();
-
-        // copy to data buffer
-        std::memcpy(buf, &data, size);
+        const auto memory = static_cast<const char*>(_memory.data());
+        lockForRead();
+        const std::size_t size = readSize(kMemoryTypeString);
+        std::memcpy(buf, &memory[dataOffset], size);
+        unlockRead();
     }
 
     inline void readFloatArrayBuf(float* buf) {

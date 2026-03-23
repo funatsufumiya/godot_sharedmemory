@@ -13,9 +13,8 @@
 
 #include "libsharedmemory.hpp"
 
-// Link Windows security / ACL APIs
+// Link Windows security API
 #pragma comment(lib, "Advapi32.lib")
-#pragma comment(lib, "Aclapi.lib")
 
 namespace lsm
 {
